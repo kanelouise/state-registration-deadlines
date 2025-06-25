@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 
-const LOCAL_API = 'http://localhost:3000/api/states'
+const API_CALL = '/api/states'
 
 type VoterInfo = {
   State: string;
@@ -21,7 +21,7 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchData(){
-      const res = await fetch(LOCAL_API);
+      const res = await fetch(API_CALL);
       const json = await res.json();
       setData(json)
     }
