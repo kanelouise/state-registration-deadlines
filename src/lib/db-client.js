@@ -1,7 +1,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: 'postgres://postgres:test@localhost:5432/state_registration_deadlines'
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // needed for Railway
+  },
 });
 
 module.exports = pool;
