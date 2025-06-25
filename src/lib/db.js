@@ -1,7 +1,8 @@
+require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(
-  'postgres://postgres:test@localhost:5432/state_registration_deadlines'
+  process.env.DATABASE_URL,
 );
 
 const VoterRegistrationDeadline = sequelize.define(
