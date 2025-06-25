@@ -58,31 +58,31 @@ export default function Page() {
         <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
           <table className="min-w-full text-sm text-left text-gray-700">
             <thead className="bg-gray-50 sticky top-0 z-10">
-              <tr>
-                <th className="p-3 border-b">State</th>
-                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineInPerson')}>
-                  In-Person {sortField === 'DeadlineInPerson' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
-                </th>
-                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineByMail')}>
-                  By Mail {sortField === 'DeadlineByMail' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
-                </th>
-                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineOnline')}>
-                  Online {sortField === 'DeadlineOnline' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
-                </th>
-                <th className="p-3 border-b">Election Day Reg.</th>
-                <th className="p-3 border-b">Online Reg. Link</th>
-                <th className="p-3 border-b">Description</th>
-              </tr>
+            <tr>
+              <th className="p-3 border-b border-r">State</th>
+              <th className="p-3 border-b border-r cursor-pointer" onClick={() => handleSort('DeadlineInPerson')}>
+                In-Person {sortField === 'DeadlineInPerson' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+              </th>
+              <th className="p-3 border-b border-r cursor-pointer" onClick={() => handleSort('DeadlineByMail')}>
+                By Mail {sortField === 'DeadlineByMail' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+              </th>
+              <th className="p-3 border-b border-r cursor-pointer" onClick={() => handleSort('DeadlineOnline')}>
+                Online {sortField === 'DeadlineOnline' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+              </th>
+              <th className="p-3 border-b border-r">Election Day Reg.</th>
+              <th className="p-3 border-b border-r">Online Reg. Link</th>
+              <th className="p-3 border-b">Description</th>
+            </tr>
             </thead>
             <tbody>
               {filtered.map((state, idx) => (
                 <tr key={state.State} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="p-3 border-b font-medium">{state.State}</td>
-                  <td className="p-3 border-b">{state.DeadlineInPerson}</td>
-                  <td className="p-3 border-b">{state.DeadlineByMail}</td>
-                  <td className="p-3 border-b">{state.DeadlineOnline}</td>
-                  <td className="p-3 border-b">{state.ElectionDayRegistration}</td>
-                  <td className="p-3 border-b">
+                  <td className="p-3 border-b border-r font-medium">{state.State}</td>
+                  <td className="p-3 border-b border-r">{state.DeadlineInPerson}</td>
+                  <td className="p-3 border-b border-r">{state.DeadlineByMail}</td>
+                  <td className="p-3 border-b border-r">{state.DeadlineOnline}</td>
+                  <td className="p-3 border-b border-r">{state.ElectionDayRegistration}</td>
+                  <td className="p-3 border-b border-r">
                     {state.OnlineRegistrationLink ? (
                       <a
                         href={state.OnlineRegistrationLink}
