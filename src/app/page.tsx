@@ -1,8 +1,17 @@
-// const LOCAL_API = 'http://localhost:3000/api/sample_api'
 'use client'
 import { useEffect, useState } from "react";
 
 const LOCAL_API = 'http://localhost:3000/api/states'
+
+type VoterInfo = {
+  State: string;
+  DeadlineInPerson: string;
+  DeadlineByMail: string;
+  DeadlineOnline: string;
+  ElectionDayRegistration: string;
+  OnlineRegistrationLink: string;
+  Description: string;
+};
 
 export default function Page() {
   const [data, setData] = useState([])
