@@ -41,70 +41,67 @@ export default function Page() {
         : bVal.localeCompare(aVal)
     })
 
-  return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold mb-6">Voter Registration Deadlines by State</h1>
-
-      <input type="text"
-      placeholder="Search by state"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      className="border px-3 py-2 mb-4 w-full
-      " />
-
-        <table className="min-w-full border border-gray-300 text-sm">
-          <thead className="bg-gray-100 text-left">
-            <tr>
-              <th className="p-2 border-b">State</th>
-              <th 
-                className="p-2 border-b" 
-                onClick={() => handleSort('DeadlineInPerson')}
-                >
-                In-Person {sortField === 'DeadlineInPerson' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+    return (
+      <main className="p-6 max-w-7xl mx-auto">
+        <h1 className="text-3xl font-semibold mb-6 text-center">Voter Registration Deadlines by State</h1>
+    
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Search by state name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full md:w-1/2 border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+    
+        <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
+          <table className="min-w-full text-sm text-left text-gray-700">
+            <thead className="bg-gray-50 sticky top-0 z-10">
+              <tr>
+                <th className="p-3 border-b">State</th>
+                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineInPerson')}>
+                  In-Person {sortField === 'DeadlineInPerson' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
                 </th>
-              <th 
-                className="p-2 border-b cursor-pointer" 
-                onClick={() => handleSort('DeadlineByMail')}>
-                By Mail {sortField === 'DeadlineByMail' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
-              </th>
-              <th 
-                className="p-2 border-b"
-                onClick={() => handleSort('DeadlineOnline')}
-                >
-                Online {sortField === 'DeadlineOnline' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
-              </th>
-              <th className="p-2 border-b">Election Day Reg.</th>
-              <th className="p-2 border-b">Online Reg. Link</th>
-              <th className="p-2 border-b">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((state) => (
-              <tr key={state.State} className="hover:bg-gray-50">
-                <td className="p-2 border-b font-medium">{state.State}</td>
-                <td className="p-2 border-b">{state.DeadlineInPerson}</td>
-                <td className="p-2 border-b">{state.DeadlineByMail}</td>
-                <td className="p-2 border-b">{state.DeadlineOnline}</td>
-                <td className="p-2 border-b">{state.ElectionDayRegistration}</td>
-                <td className="p-2 border-b">
-                  {state.OnlineRegistrationLink ? (
-                    <a
-                      href={state.OnlineRegistrationLink}
-                      className="text-blue-600 underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Link
-                    </a>
-                  ) : (
-                    '—'
-                  )}
-                </td>
-                <td className="p-2 border-b">{state.Description}</td>
+                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineByMail')}>
+                  By Mail {sortField === 'DeadlineByMail' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+                </th>
+                <th className="p-3 border-b cursor-pointer" onClick={() => handleSort('DeadlineOnline')}>
+                  Online {sortField === 'DeadlineOnline' ? (sortOrder === 'asc' ? '↑' : '↓') : ''}
+                </th>
+                <th className="p-3 border-b">Election Day Reg.</th>
+                <th className="p-3 border-b">Online Reg. Link</th>
+                <th className="p-3 border-b">Description</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((state, idx) => (
+                <tr key={state.State} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <td className="p-3 border-b font-medium">{state.State}</td>
+                  <td className="p-3 border-b">{state.DeadlineInPerson}</td>
+                  <td className="p-3 border-b">{state.DeadlineByMail}</td>
+                  <td className="p-3 border-b">{state.DeadlineOnline}</td>
+                  <td className="p-3 border-b">{state.ElectionDayRegistration}</td>
+                  <td className="p-3 border-b">
+                    {state.OnlineRegistrationLink ? (
+                      <a
+                        href={state.OnlineRegistrationLink}
+                        className="text-blue-600 underline hover:text-blue-800"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Link
+                      </a>
+                    ) : (
+                      '—'
+                    )}
+                  </td>
+                  <td className="p-3 border-b">{state.Description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
-    );
-}
+    )
+  }    
