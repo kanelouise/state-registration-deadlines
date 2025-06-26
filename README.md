@@ -17,7 +17,7 @@ This is a full-stack web app that displays voter registration deadlines by state
 ## Live Demo
 
 Access the deployed app at:
-[https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)
+[https://state-registration-deadlines.vercel.app/](https://state-registration-deadlines.vercel.app/)
 
 ## Getting Started Locally
 
