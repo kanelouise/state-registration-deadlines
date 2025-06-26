@@ -1,55 +1,106 @@
-# SL/VF Technical Take Home
+# Voter Registration Lookup App
 
-> Build a state voter registration search tool
+This is a full-stack web app that displays voter registration deadlines by state. It includes:
 
-- [Evaluation](#evaluation)
-- [What we are looking for](#what-we-are-looking-for)
-- [Submitting your code](#submitting-your-code)
-- [Questions or Concerns](#questions-or-concerns)
-- [Running the code](#running-the-code)
+* A CSV import into a PostgreSQL database using Sequelize
+* A REST API built with Next.js API routes
+* A searchable, sortable frontend UI built with React and Tailwind CSS
+* Deployment to Vercel and a cloud PostgreSQL database via Railway
 
-## Evaluation
+## Features
 
-1. Using the provided voter_registration_deadlines.csv, use the language and ORM framework of your choice to parse and store the info from voter_registration_deadlines.csv for each state into a sql database (This is already done in the sample provided). This is a sample of old data taken from various voter registration sites in 2018, and does not represent the current reality of these states. It should only be used for the purposes of this exercise.
-2. Create a UI that displays the list of all the states and their voter information. The user should be able to filter and sort this table.
-3. Create an api endpoint that will retrieve the data for this table from the backend DB.
-4. Write tests to validate the api call(s).
-5. Include a Readme (Or add to this one if you choose to clone this repo) that describes the steps necessary for building and running the application as well as running the tests locally.
+* Displays voter registration deadlines for all 50 U.S. states
+* Users can search for a state by name
+* Sort deadlines by in-person, mail, or online registration dates
+* Link to each state's online registration site if available
 
-You may use any pattern or library that you find suitable to accomplish this assessment. Internally, we use Python and SQL Alchemy (SwingLeft) or NodeJS and Knex (VoteForward) backend and for the frontend we use React with Panda-UI and Chakra-UI for styling on the Next.Js framework.
+## Live Demo
 
-Additionally, we have provided a sample hello-world framework which you may modify and use for this exercise. This sample already imports the voter data into a postgres DB, and sets up an API endpoint and frontend page for you to work from or use as an example.
+Access the deployed app at:
+[https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)
 
-Alternatively, you may submit an equivalent open-source code sample you have written. If you choose to go with this route, please include as much detail as possible about which factors of your sample we should evaluate, and be prepared to discuss your code sample in the follow-up interview.
+## Getting Started Locally
 
-## What we are looking for
+### 1. Clone the Repo
 
-- Does it work?
-- Is the code clean and accessible to others?
-- Does the code handle edge case conditions?
+```bash
+git clone https://github.com/kanelouise/state-registration-deadlines.git
+cd state-registration-deadlines
+```
 
-For the UX, we do not expect a fancy graphic design or style, but please make sure that the UI is clean and usable on both desktop and mobile web browsers.
+### 2. Install Dependencies
 
-## Time Limit
+```bash
+npm install
+```
 
-The purpose of the test is not to measure the speed of code creation. Please try to finish by the end of Wednsday, June 25, but extra allowances are fine and will not be strictly penalized.
+### 3. Set Up Environment Variables
 
-## Submitting Your Code
+Create a `.env.local` file with:
 
-The preferred way to submit your code is to clone this repo, and open a pull request with your changes.
-Alternatively, you may submit the code in the form of a zip file and send it to dcarden@swingleft.org. If you do this, please be sure to include a README in your submission with full details on how to set up and run your code.
+```
+DATABASE_URL=your_local_or_cloud_postgres_url
+```
 
-## Questions or Concerns
+If you're using Railway, copy the `PostgreSQL` connection string from your project dashboard.
 
-If you have any questions at all, feel free to reach out to [dcarden@swingleft.org](mailto:dcarden@swingleft.org)
+### 4. Seed the Database
 
-## Running The Code
+Make sure you have a Postgres database running locally or in the cloud.
 
-[If you choose to clone this repo and work from the hello-world sample, please use the directions below. If you implement another solution using a different language or framework, please update these directions to reflect your code.]
+* To seed a **local** database:
 
-### Installation
+  ```bash
+  node scripts/create-local-db.js
+  ```
 
-1. pull down the repo.
-2. `npm install --no-save`
-3. `npm run db:create-db`
-4. `npm run dev`
+* To seed a **cloud (Railway)** database:
+
+  ```bash
+  node scripts/create-cloud-db.js
+  ```
+
+### 5. Run the App Locally
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` in your browser.
+
+## Running Tests
+
+```bash
+npm run test
+```
+
+This will test the `/api/states` endpoint using Supertest.
+
+## Project Structure
+
+```
+voter_registration_deadlines.csv        # Source data
+└── src
+    ├── app
+    │   ├── layout.tsx                   # Root layout with Tailwind import
+    │   ├── page.tsx                     # Main UI page
+    │   └── api
+    │       └── states
+    │           ├── route.js             # API endpoint to serve state data
+    │           └── api.test.js          # Tests for the states API
+    ├── styles
+    │   └── tailwind.css                 # Tailwind CSS entry point
+    └── lib
+        ├── db.js                        # Sequelize model and config
+        └── db-client.js                 # PostgreSQL client connection
+```
+
+## Tech Stack
+
+* Next.js (App Router)
+* React
+* Tailwind CSS
+* PostgreSQL
+* Sequelize
+* Railway (DB hosting)
+* Vercel (Deployment)
